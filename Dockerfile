@@ -1,5 +1,5 @@
 #On choisit une debian
-FROM debian:12.5
+FROM debian:12.15
 
 LABEL org.opencontainers.image.authors="github@diouxx.be"
 
@@ -9,9 +9,9 @@ ENV DEBIAN_FRONTEND noninteractive
 
 #Installation d'apache et de php8.3 avec extension
 RUN apt update \
-&& apt install --yes ca-certificates apt-transport-https lsb-release wget curl \
+&& apt install --yes ca-certificates apt-transport-https lsb-release wget curl gnupg2 \
 && curl -sSLo /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg \ 
-&& sh -c 'echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list' \
+&& echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php.list \
 && apt update \
 && apt install --yes --no-install-recommends \
 apache2 \
