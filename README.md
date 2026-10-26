@@ -36,6 +36,13 @@ More info in the 📄[Docs](https://glpi-install.readthedocs.io/en/latest/instal
 | normal/normal      	| "normal" account  	|
 | post-only/postonly 	| post-only account 	|
 
+# Rebuild Docker image with latest versions of everything (if already deployed)
+
+```sh
+docker build --pull -t glpi .
+docker restart glpi
+```
+
 # Deploy with CLI
 
 ## Deploy GLPI 
